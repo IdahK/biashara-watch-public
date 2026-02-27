@@ -1,0 +1,15 @@
+# Personal data — never commit these
+config.json
+stock_prices.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db

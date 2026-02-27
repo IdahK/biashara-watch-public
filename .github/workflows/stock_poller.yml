@@ -1,0 +1,52 @@
+name: BiasharaWatch — NSE Stock Tracker
+
+on:
+  schedule:
+    # NSE trades 9:00 AM – 5:00 PM EAT = 06:00–14:00 UTC, Mon–Fri
+    # Poll every 10 minutes within that window.
+    # Note: GitHub Actions cron runs in UTC. EAT = UTC+3.
+    - cron: '0,10,20,30,40,50 6-13 * * 1-5'  # 06:00–13:50 UTC = 9:00 AM–4:50 PM EAT
+    - cron: '0 14 * * 1-5'                    # 14:00 UTC = 5:00 PM EAT (closing run + Friday email)
+  workflow_dispatch:  # Manual trigger from the Actions tab
+
+jobs:
+  poll-stocks:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run BiasharaWatch stock poller
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
+          NOTIFY_EMAIL:   ${{ secrets.NOTIFY_EMAIL }}
+        run: python stock_poller.py --force
+
+      - name: Commit and push updated Excel file
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stock_prices.xlsx
+          git diff --staged --quiet || git commit -m "📈 NSE prices updated $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

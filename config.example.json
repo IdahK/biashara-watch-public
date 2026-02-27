@@ -1,0 +1,14 @@
+{
+  "trading_hours": {
+    "start": 9,
+    "end": 17,
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "timezone": "EAT (UTC+3)"
+  },
+  "email": {
+    "send_on": "Friday",
+    "send_at_hour": 17
+  },
+  "output_file": "stock_prices.xlsx",
+  "source_url": "https://example.com/nse-data"
+}
