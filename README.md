@@ -1,6 +1,6 @@
 # biashara-watch-public
 
-# 📈 biasharaWatch — NSE Stock Tracker
+# 📈 BiasharaWatch — NSE Stock Tracker
 
 [![NSE Stock Tracker](https://github.com/IdahK/biashara-watch-public/actions/workflows/stock_poller.yml/badge.svg)](https://github.com/IdahK/biashara-watch-public/actions/workflows/stock_poller.yml)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
