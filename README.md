@@ -5,8 +5,6 @@
 [![NSE Stock Tracker](https://github.com/IdahK/biashara-watch-public/actions/workflows/stock_poller.yml/badge.svg)](https://github.com/IdahK/biashara-watch-public/actions/workflows/stock_poller.yml)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/Runs%20on-GitHub%20Actions-2088FF?logo=github-actions&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Zero cost](https://img.shields.io/badge/Hosting%20cost-KES%200-006633)
 ![NSE](https://img.shields.io/badge/Exchange-NSE%20Kenya-006633)
 
 > Automated tracker for all NSE-listed stocks. Scrapes live prices every 10 minutes during trading hours, updates a formatted Excel workbook, and emails you a portfolio summary every Friday — all running free on GitHub Actions with no server required.
